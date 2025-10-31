@@ -1,26 +1,20 @@
 package ch.heigvd.bm25.utils;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
+import org.junit.jupiter.api.Test;
 
 public class IndexTest {
 
     @Test
     void constructEmptyIndex() {
-        ArrayList<String> vocab = new ArrayList<>(
-                List.of("like", "best", "plai", "can")
-        );
-        ArrayList<String> docs = new ArrayList<>(
-                List.of("file1.txt", "file2.txt")
-        );
+        ArrayList<String> vocab = new ArrayList<>(List.of("like", "best", "plai", "can"));
+        ArrayList<String> docs = new ArrayList<>(List.of("file1.txt", "file2.txt"));
 
         Index index = new Index(vocab, docs);
 
@@ -29,35 +23,31 @@ public class IndexTest {
 
         assertEquals(docs.get(0), index.getDocumentName(0));
         assertEquals(docs.get(1), index.getDocumentName(1));
-
     }
 
     @Test
     void indexToStr() {
-        String indexStrExpected = "docNames\n" +
-                "file1.txt|file2.txt\n" +
-                "numOfDocs\n" +
-                "2\n" +
-                "vocabSize\n" +
-                "4\n" +
-                "vocabulary\n" +
-                "like best plai can\n" +
-                "matrixScores\n" +
-                "nRows : 2\n" +
-                "nCols : 4\n" +
-                "Indices\n" +
-                "0 : 0, 1\n" +
-                "1 : 2, 3\n" +
-                "Data\n" +
-                "0 : 0.21, 0.45\n" +
-                "1 : 0.1, 0.32\n";
+        String indexStrExpected =
+                "docNames\n"
+                        + "file1.txt|file2.txt\n"
+                        + "numOfDocs\n"
+                        + "2\n"
+                        + "vocabSize\n"
+                        + "4\n"
+                        + "vocabulary\n"
+                        + "like best plai can\n"
+                        + "matrixScores\n"
+                        + "nRows : 2\n"
+                        + "nCols : 4\n"
+                        + "Indices\n"
+                        + "0 : 0, 1\n"
+                        + "1 : 2, 3\n"
+                        + "Data\n"
+                        + "0 : 0.21, 0.45\n"
+                        + "1 : 0.1, 0.32\n";
 
-        ArrayList<String> vocab = new ArrayList<>(
-                List.of("like", "best", "plai", "can")
-        );
-        ArrayList<String> docs = new ArrayList<>(
-                List.of("file1.txt", "file2.txt")
-        );
+        ArrayList<String> vocab = new ArrayList<>(List.of("like", "best", "plai", "can"));
+        ArrayList<String> docs = new ArrayList<>(List.of("file1.txt", "file2.txt"));
 
         Index index = new Index(vocab, docs);
 
@@ -76,26 +66,16 @@ public class IndexTest {
     @Test
     void indexToJsonAndBack() throws JsonProcessingException {
         DSparseMatrixLIL matrix = new DSparseMatrixLIL(2, 4);
-        int[] rowIndexes = new int[] {
-                0, 0, 0, 1, 1
-        };
-        int[] columnIndexes = new int[] {
-                0, 1, 3, 1, 2
-        };
-        double[] data = new double[] {
-                1.0, 1.1, 1.3, 2.0, 2.1
-        };
+        int[] rowIndexes = new int[] {0, 0, 0, 1, 1};
+        int[] columnIndexes = new int[] {0, 1, 3, 1, 2};
+        double[] data = new double[] {1.0, 1.1, 1.3, 2.0, 2.1};
 
         for (int i = 0; i < rowIndexes.length; i++) {
             matrix.set(rowIndexes[i], columnIndexes[i], data[i]);
         }
 
-        ArrayList<String> vocab = new ArrayList<>(
-                List.of("like", "best", "plai", "can")
-        );
-        ArrayList<String> docNames = new ArrayList<>(
-                List.of("file1.txt", "file2.txt")
-        );
+        ArrayList<String> vocab = new ArrayList<>(List.of("like", "best", "plai", "can"));
+        ArrayList<String> docNames = new ArrayList<>(List.of("file1.txt", "file2.txt"));
 
         Index srcIndex = new Index(vocab, docNames, matrix);
 

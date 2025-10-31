@@ -1,17 +1,15 @@
 package ch.heigvd.bm25;
 
+import static org.junit.jupiter.api.Assertions.assertArrayEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 
 import ch.heigvd.bm25.utils.Index;
 import ch.heigvd.bm25.utils.RankingResult;
-import org.junit.jupiter.api.Test;
-
 import java.util.ArrayList;
 import java.util.List;
-
+import org.junit.jupiter.api.Test;
 
 public class BM25Test {
 
@@ -30,21 +28,19 @@ public class BM25Test {
         ArrayList<String> tokenized = bm25.tokenize(doc);
 
         assertArrayEquals(
-                new String[] {"cat", "felin", "like", "eat", "bird"},
-                tokenized.toArray()
-        );
+                new String[] {"cat", "felin", "like", "eat", "bird"}, tokenized.toArray());
     }
 
     @Test
     void buildIndex() {
-        ArrayList<String> docs = new ArrayList<>(List.of(
-                "a cat is a feline and likes to eat bird",
-                "a dog is the human's best friend and likes to play",
-                "a bird is a beautiful animal that can fly"
-        ));
-        ArrayList<String> filenames = new ArrayList<>(List.of(
-                "file1.txt", "file2.txt", "file3.txt"
-        ));
+        ArrayList<String> docs =
+                new ArrayList<>(
+                        List.of(
+                                "a cat is a feline and likes to eat bird",
+                                "a dog is the human's best friend and likes to play",
+                                "a bird is a beautiful animal that can fly"));
+        ArrayList<String> filenames =
+                new ArrayList<>(List.of("file1.txt", "file2.txt", "file3.txt"));
 
         BM25 bm25 = new BM25();
 
@@ -61,18 +57,15 @@ public class BM25Test {
 
     @Test
     void retrieveTopK() {
-        ArrayList<String> vocab = new ArrayList<>(List.of(
-                "like", "best", "plai", "can", "fly",
-                "beauti", "cat", "bird", "friend", "eat",
-                "anim", "dog", "human", "felin"
-        ));
-        ArrayList<String> docNames = new ArrayList<>(List.of(
-                "file1.txt", "file2.txt", "file3.txt"
-        ));
+        ArrayList<String> vocab =
+                new ArrayList<>(
+                        List.of(
+                                "like", "best", "plai", "can", "fly", "beauti", "cat", "bird",
+                                "friend", "eat", "anim", "dog", "human", "felin"));
+        ArrayList<String> docNames =
+                new ArrayList<>(List.of("file1.txt", "file2.txt", "file3.txt"));
 
-        Index index = new Index(
-                vocab, docNames
-        );
+        Index index = new Index(vocab, docNames);
 
         index.getMatrix().set(0, 0, 0.2192);
         index.getMatrix().set(0, 6, 0.4575);
@@ -95,9 +88,7 @@ public class BM25Test {
 
         BM25 bm25 = new BM25(index);
 
-        ArrayList<String> query = new ArrayList<>(List.of(
-                "anim", "human", "best", "friend"
-        ));
+        ArrayList<String> query = new ArrayList<>(List.of("anim", "human", "best", "friend"));
 
         ArrayList<RankingResult> res = bm25.retrieveTopK(query, 3);
 
@@ -105,6 +96,4 @@ public class BM25Test {
         assertEquals(1, res.get(0).getDocIndex());
         assertEquals(2, res.get(1).getDocIndex());
     }
-
 }
-
