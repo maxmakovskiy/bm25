@@ -148,3 +148,6 @@ Thumbs.db
 
 # Folder config file
 [Dd]esktop.ini
+
+# Custom
+remote-targets.xml
