@@ -8,6 +8,16 @@
     <artifactId>bm25</artifactId>
     <version>1.0-SNAPSHOT</version>
 
+    <distributionManagement>
+        <repository>
+            <id>github</id>
+            <name>GitHub maxmakovskiy Maven Packages</name>
+            <url>https://maven.pkg.github.com/maxmakovskiy/bm25</url>
+        </repository>
+
+
+    </distributionManagement>
+
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
