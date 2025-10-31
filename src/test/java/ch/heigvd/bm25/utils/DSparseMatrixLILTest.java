@@ -1,10 +1,12 @@
 package ch.heigvd.bm25.utils;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.junit.jupiter.api.Test;
-
-import static org.junit.jupiter.api.Assertions.*;
-
 
 public class DSparseMatrixLILTest {
 
@@ -18,8 +20,8 @@ public class DSparseMatrixLILTest {
 
     @Test
     void breakConstructionSparseMatrix() {
-        IllegalArgumentException exc = assertThrows(IllegalArgumentException.class,
-                () -> new DSparseMatrixLIL(-4, 4));
+        IllegalArgumentException exc =
+                assertThrows(IllegalArgumentException.class, () -> new DSparseMatrixLIL(-4, 4));
 
         assertEquals("nRows and nCols must be non-negative.", exc.getMessage());
     }
@@ -28,7 +30,7 @@ public class DSparseMatrixLILTest {
     void get() {
         DSparseMatrixLIL matrix = new DSparseMatrixLIL(4, 4);
 
-        double res = matrix.get(1,1);
+        double res = matrix.get(1, 1);
 
         assertEquals(0.0, res);
     }
@@ -36,8 +38,8 @@ public class DSparseMatrixLILTest {
     @Test
     void breakingGet() {
         DSparseMatrixLIL matrix = new DSparseMatrixLIL(4, 4);
-        IndexOutOfBoundsException exc = assertThrows(IndexOutOfBoundsException.class,
-                () -> matrix.get(10, 4));
+        IndexOutOfBoundsException exc =
+                assertThrows(IndexOutOfBoundsException.class, () -> matrix.get(10, 4));
 
         assertEquals("Cannot find indices for rowIdx: 10 and colIdx: 4", exc.getMessage());
     }
@@ -46,20 +48,20 @@ public class DSparseMatrixLILTest {
     void set() {
         DSparseMatrixLIL matrix = new DSparseMatrixLIL(4, 4);
 
-        assertEquals(0.0, matrix.get(1,1));
+        assertEquals(0.0, matrix.get(1, 1));
 
         double val = 4.0;
         matrix.set(1, 1, val);
 
-        assertEquals(val, matrix.get(1,1));
+        assertEquals(val, matrix.get(1, 1));
     }
 
     @Test
     void breakingSetOutOfBound() {
         DSparseMatrixLIL matrix = new DSparseMatrixLIL(4, 4);
 
-        IndexOutOfBoundsException exc = assertThrows(IndexOutOfBoundsException.class,
-                () -> matrix.set(1, 10, 4.0));
+        IndexOutOfBoundsException exc =
+                assertThrows(IndexOutOfBoundsException.class, () -> matrix.set(1, 10, 4.0));
 
         assertEquals("Cannot set value at rowIdx: 1 and colIdx: 10", exc.getMessage());
     }
@@ -81,15 +83,9 @@ public class DSparseMatrixLILTest {
     @Test
     void matrixToJsonAndBack() throws JsonProcessingException {
         DSparseMatrixLIL srcMatrix = new DSparseMatrixLIL(4, 4);
-        int[] rowIndexes = new int[] {
-                0, 0, 0, 1, 1, 2, 3
-        };
-        int[] columnIndexes = new int[] {
-                0, 1, 3, 1, 0, 2, 3
-        };
-        double[] data = new double[] {
-                1.0, 1.1, 1.3, 2.0, 2.1, 3.0, 4.0
-        };
+        int[] rowIndexes = new int[] {0, 0, 0, 1, 1, 2, 3};
+        int[] columnIndexes = new int[] {0, 1, 3, 1, 0, 2, 3};
+        double[] data = new double[] {1.0, 1.1, 1.3, 2.0, 2.1, 3.0, 4.0};
 
         for (int i = 0; i < rowIndexes.length; i++) {
             srcMatrix.set(rowIndexes[i], columnIndexes[i], data[i]);
