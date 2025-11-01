@@ -1,4 +1,4 @@
-package ch.heigvd.bm25.utils;
+package ch.heigvd.dai.bm25.utils;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;

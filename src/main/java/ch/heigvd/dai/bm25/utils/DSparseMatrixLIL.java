@@ -1,4 +1,4 @@
-package ch.heigvd.bm25.utils;
+package ch.heigvd.dai.bm25.utils;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;

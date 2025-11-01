@@ -1,12 +1,12 @@
-package ch.heigvd.bm25;
+package ch.heigvd.dai.bm25;
 
 import static org.junit.jupiter.api.Assertions.assertArrayEquals;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
-import ch.heigvd.bm25.utils.Index;
-import ch.heigvd.bm25.utils.RankingResult;
+import ch.heigvd.dai.bm25.utils.Index;
+import ch.heigvd.dai.bm25.utils.RankingResult;
 import java.util.ArrayList;
 import java.util.List;
 import org.junit.jupiter.api.Test;

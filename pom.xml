@@ -4,7 +4,7 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>ch.heigvd</groupId>
+    <groupId>ch.heigvd.dai</groupId>
     <artifactId>bm25</artifactId>
     <version>1.0-SNAPSHOT</version>
 
@@ -14,8 +14,6 @@
             <name>GitHub maxmakovskiy Maven Packages</name>
             <url>https://maven.pkg.github.com/maxmakovskiy/bm25</url>
         </repository>
-
-
     </distributionManagement>
 
     <properties>
