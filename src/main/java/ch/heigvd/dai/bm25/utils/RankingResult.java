@@ -1,4 +1,4 @@
-package ch.heigvd.bm25.utils;
+package ch.heigvd.dai.bm25.utils;
 
 /**
  * Represents entity in the ranking results. Basically provides convenient way to represent

@@ -1,8 +1,8 @@
-package ch.heigvd.bm25;
+package ch.heigvd.dai.bm25;
 
-import ch.heigvd.bm25.utils.Index;
-import ch.heigvd.bm25.utils.RankingResult;
-import ch.heigvd.bm25.utils.Stopword;
+import ch.heigvd.dai.bm25.utils.Index;
+import ch.heigvd.dai.bm25.utils.RankingResult;
+import ch.heigvd.dai.bm25.utils.Stopword;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
