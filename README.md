@@ -3,7 +3,7 @@
 
   # BM25 Search library
 
-  **A fast and lightweight BM25-based library to search in the corpus of provided files implemented in JAVA**
+  **A fast and lightweight BM25-based library to search through the corpus of provided files implemented in JAVA**
 </div>
 
 
